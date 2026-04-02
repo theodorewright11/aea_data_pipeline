@@ -225,6 +225,15 @@ Runs once across all datasets.
 
 Ten cumulative variants are built (see PRD.md Section 3 for the full list).
 
+### Job Zones
+
+Merges O*NET Job Zone data (`job_zones_v30.1.csv`, sourced from `Job Zones.xlsx`) into ECO 2025 only. Job Zones classify occupations into one of five zones (1--5) based on education, experience, and training requirements.
+
+- Normalizes `title_current` for matching against Job Zone titles
+- Deduplicates occupations before merging to get one `job_zone` value per occupation
+- Merges back into the full ECO 2025 task-level DataFrame on `title_current`
+- `job_zone` is stored as `Int64` (nullable integer)
+
 ### DWS Ratings
 
 Merges `dws_ratings.csv` into ECO 2025 (star ratings for tasks).
@@ -262,6 +271,7 @@ Output: `third_pass_*.csv` -> copied to `final/final_*.csv`
 | `task_ratings_v30.1.csv` | May 2025 | Frequency/importance/relevance |
 | `physical_tasks.csv` | Microsoft | Physical task boolean flags |
 | `dws_ratings.csv` | O*NET | Star ratings for ECO |
+| `job_zones_v30.1.csv` | O*NET | Job Zone classifications (1--5) for ECO 2025 |
 
 ### Economic Data
 

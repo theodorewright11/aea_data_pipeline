@@ -102,6 +102,7 @@ Every final dataset includes these columns (some may be null depending on datase
 | `relevance` | Task relevance (0--100 from O*NET survey) |
 | `emp_tot_nat_2024` | National employment (BLS OEWS 2024) |
 | `a_med_nat_2024` | National median annual wage (BLS OEWS 2024) |
+| `job_zone` | O*NET Job Zone (1--5), ECO 2025 only |
 | `date` | Dataset snapshot date |
 
 Plus state-level wage and employment columns for all 54 US states/territories (`emp_{abbrev}`, `a_median_{abbrev}`, `h_median_{abbrev}` for both 2024 and 2015), and 2015 wage/employment columns (nominal and inflation-adjusted).

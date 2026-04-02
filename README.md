@@ -61,6 +61,7 @@ aea_data_pipeline/
 | `task_ratings_v30.1.csv` | Frequency, importance, relevance ratings |
 | `physical_tasks.csv` | Physical task boolean flags |
 | `dws_ratings.csv` | Star ratings for ECO |
+| `job_zones_v30.1.csv` | Job Zone classifications (1--5) for ECO 2025 |
 
 ### Economic Data
 
@@ -116,6 +117,7 @@ Every final dataset includes these columns (some may be null depending on datase
 | `relevance` | Task relevance (0--100 from O\*NET survey) |
 | `emp_tot_nat_2024` | National employment (BLS OEWS 2024) |
 | `a_med_nat_2024` | National median annual wage (BLS OEWS 2024) |
+| `job_zone` | O\*NET Job Zone (1--5), ECO 2025 only |
 | `date` | Dataset snapshot date |
 
 ---
@@ -126,4 +128,4 @@ The pipeline runs in three parts from a single notebook (`scripts/data_merge.ipy
 
 1. **Part 1** -- Runs once per dataset (set `run_name`). Maps raw AI data to O\*NET tasks, adds SOC structure, merges BLS wage/employment, and adjusts employment for decimal SOC codes.
 2. **Part 2** -- Runs once across all datasets. Adds snapshot dates, O\*NET taxonomy (DWA/IWA/GWA), physical task flags, and standardized auto\_aug scores.
-3. **Part 3** -- Runs once across all datasets. Merges task ratings, builds cumulative AEI datasets, and does final column reordering.
+3. **Part 3** -- Runs once across all datasets. Merges task ratings, add Utah DWS outlook numbers, adds Job Zones (ECO 2025), builds cumulative AEI datasets, and does final column reordering.

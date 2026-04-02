@@ -77,7 +77,7 @@ aea_data_pipeline/
 
 ## Output Datasets
 
-All final outputs are saved to `data/final/`. There are 15 per-version datasets and 10 cumulative AEI datasets (25 total). Each row is one task within one occupation.
+All final outputs are saved to `data/final/`. There are 15 per-version datasets and 42 cumulative datasets (57 total). Each row is one task within one occupation.
 
 ### Per-Version (15 files)
 
@@ -90,9 +90,23 @@ All final outputs are saved to `data/final/`. There are 15 per-version datasets 
 | ECO 2025 | `final_eco_2025.csv` |
 | ECO 2015 | `final_eco_2015.csv` |
 
-### Cumulative AEI (10 files)
+### Cumulative (42 files)
 
-Cumulative datasets combine per-version AEI datasets (union of tasks, max auto\_aug, summed & re-normalized pct). See [PRD.md](PRD.md) for the full list of cumulative variants.
+Cumulative datasets combine per-version datasets across sources. For each bucket, a new cumulative version is produced each time a new dataset arrives chronologically. Combining logic: union of task-occupation pairs, max `auto_aug_mean`, max `pct_normalized` (highest observed usage share from any source, no renormalization).
+
+Output naming: `final_{bucket_name}_{end_date}.csv`
+
+| Bucket | Description | Sources | Task Set | Versions |
+|--------|-------------|---------|----------|----------|
+| `all_confirmed_usage` | All confirmed usage | AEI Both + Microsoft | 2025 | 6 |
+| `confirmed_human_usage` | Confirmed human usage | AEI Conv + Microsoft | 2025 | 6 |
+| `aei_all_usage` | AEI all confirmed usage | AEI Conv + AEI API | 2015 | 5 |
+| `aei_human_usage` | AEI confirmed human usage | AEI Conv only | 2015 | 5 |
+| `aei_agentic_usage` | AEI confirmed agentic usage | AEI API only | 2015 | 3 |
+| `all_agentic_usage` | All possible agentic usage | MCP + AEI API | 2025 | 7 |
+| `all_usage` | All usage potential | AEI Both + MCP + Microsoft | 2025 | 10 |
+
+2025 task set buckets use ECO 2025 as structural backbone (DWA/IWA/GWA, `title_current`, SOC 2019 codes). AEI sources match their `title` (2010 SOC) against ECO 2025's `title_current` (2019 SOC). 2015 task set buckets use native AEI row structure.
 
 ---
 

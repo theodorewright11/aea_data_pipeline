@@ -56,22 +56,35 @@ All final outputs are saved to `data/final/`. Each row is one task within one oc
 | ECO 2025 | `final_eco_2025.csv` | 2019 |
 | ECO 2015 | `final_eco_2015.csv` | 2010 |
 
-### Cumulative AEI Datasets (10 files)
+### Cumulative Datasets (42 files)
 
-Built by combining per-version AEI datasets (union of tasks, max auto_aug, summed & re-normalized pct):
+Built by combining per-version datasets across sources. For each bucket, a new cumulative version is produced each time a new dataset arrives chronologically. Combining logic: union of task-occupation pairs, max `auto_aug_mean`, max `pct_normalized`.
 
-| Dataset | Combines |
-|---------|----------|
-| `final_aei_cumulative_v1.csv` | AEI v1 |
-| `final_aei_cumulative_v2.csv` | AEI v1 + v2 |
-| `final_aei_cumulative_v3.csv` | AEI v1 + v2 + v3 + API v3 |
-| `final_aei_cumulative_v4.csv` | AEI v1 + v2 + v3 + v4 + API v3 + API v4 |
-| `final_aei_cumulative_v5.csv` | AEI v1 + v2 + v3 + v4 + v5 + API v3 + API v4 + API v5 |
-| `final_aei_cumulative_aei_only_v3.csv` | AEI v1 + v2 + v3 (no API) |
-| `final_aei_cumulative_aei_only_v4.csv` | AEI v1 + v2 + v3 + v4 (no API) |
-| `final_aei_cumulative_aei_only_v5.csv` | AEI v1 + v2 + v3 + v4 + v5 (no API) |
-| `final_aei_cumulative_api_only_v4.csv` | API v3 + API v4 |
-| `final_aei_cumulative_api_only_v5.csv` | API v3 + API v4 + API v5 |
+Output naming: `final_{bucket_name}_{end_date}.csv`
+
+**Usage buckets:**
+
+| Bucket | Description | Sources | Task Set | Versions |
+|--------|-------------|---------|----------|----------|
+| `all_confirmed_usage` | All confirmed usage | AEI Both + Microsoft | 2025 | 6 (2024-09-30 to 2026-02-12) |
+| `confirmed_human_usage` | Confirmed human usage | AEI Conv + Microsoft | 2025 | 6 (2024-09-30 to 2026-02-12) |
+| `aei_all_usage` | AEI all confirmed usage | AEI Conv + AEI API | 2015 | 5 (2024-12-23 to 2026-02-12) |
+| `aei_human_usage` | AEI confirmed human usage | AEI Conv only | 2015 | 5 (2024-12-23 to 2026-02-12) |
+| `aei_agentic_usage` | AEI confirmed agentic usage | AEI API only | 2015 | 3 (2025-08-11 to 2026-02-12) |
+
+**Agentic bucket:**
+
+| Bucket | Description | Sources | Task Set | Versions |
+|--------|-------------|---------|----------|----------|
+| `all_agentic_usage` | All possible agentic usage | MCP + AEI API | 2025 | 7 (2025-04-24 to 2026-02-18) |
+
+**All bucket:**
+
+| Bucket | Description | Sources | Task Set | Versions |
+|--------|-------------|---------|----------|----------|
+| `all_usage` | All usage potential | AEI Both + MCP + Microsoft | 2025 | 10 (2024-09-30 to 2026-02-18) |
+
+2025 task set buckets use ECO 2025 as structural backbone. AEI/API sources are filtered to task-occupation pairs that exist in ECO 2025 before combining. 2015 task set buckets use native AEI row structure.
 
 ### ECO Baseline Datasets (2 files)
 

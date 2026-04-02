@@ -213,17 +213,34 @@ Runs once across all datasets.
 - **Penalty**: if an occupation has >50% of its tasks imputed below occupation level, those imputed `freq_mean` values are halved
 - For ECO 2025 only: computes `task_prop = count_2015_tasks / count_2025_tasks` per occupation (2015 tasks mapped to 2025 occupations via SOC crosswalk). Used by the dashboard backend as a deflation factor when crosswalking AEI data.
 
-### Cumulative AEI Datasets
+### Cumulative Datasets
 
-`build_cumulative(data_dir, files)`:
+Seven buckets of cumulative datasets are built, each with multiple time-point versions (one per new dataset arrival). Output naming: `final_{bucket_name}_{end_date}.csv`.
+
+**Buckets:**
+
+| Bucket | Sources | Task Set | Versions |
+|--------|---------|----------|----------|
+| `all_confirmed_usage` | AEI Both + Microsoft | 2025 | 6 |
+| `confirmed_human_usage` | AEI Conv + Microsoft | 2025 | 6 |
+| `aei_all_usage` | AEI Conv + AEI API | 2015 | 5 |
+| `aei_human_usage` | AEI Conv only | 2015 | 5 |
+| `aei_agentic_usage` | AEI API only | 2015 | 3 |
+| `all_agentic_usage` | MCP + AEI API | 2025 | 7 |
+| `all_usage` | AEI Both + MCP + Microsoft | 2025 | 10 |
+
+**2015 task set builds** (`build_cumulative_2015`):
 - Merge key: `["title", "task_normalized", "dwa_title", "iwa_title", "gwa_title"]`
-- For matched rows across versions:
-  - `auto_aug_mean`: takes **max**
-  - `pct_normalized`: **sums** then **re-normalizes** based on unique title x task pairs (divides by total, scales to original single-snapshot magnitude)
-  - `date`: takes **latest**
-  - Other columns: carries from latest version
+- For matched rows: `auto_aug_mean` takes **max**, `pct_normalized` takes **max** (highest observed usage share), `date` takes **latest**, other columns from latest version
+- No pct renormalization — values preserve the scale of whichever source had the higher value
 
-Ten cumulative variants are built (see PRD.md Section 3 for the full list).
+**2025 task set builds** (`build_cumulative_2025`):
+- Extracts scores per unique `(title_current, task_normalized)` from each source
+- AEI/API sources match their `title` (2010 SOC) against ECO 2025's `title_current` (2019 SOC); MCP/Microsoft match `title_current` directly (~74% of AEI pairs match)
+- Combines scores: **max** auto_aug, **max** pct (no renormalization), **latest** date
+- Joins combined scores to ECO 2025 backbone on `(title_current, task_normalized)` for structural columns (DWA/IWA/GWA, SOC 2019 codes, etc.)
+
+Total output: 42 cumulative CSV files across all buckets.
 
 ### Job Zones
 

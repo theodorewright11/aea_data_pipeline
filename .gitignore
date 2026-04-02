@@ -2,6 +2,7 @@
 data/*
 data/merged_data_files/
 data/final/
+data_source_links.md
 
 # --- Raw inputs used by data_merge.ipynb (allowlisted) ---
 

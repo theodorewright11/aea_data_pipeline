@@ -15,7 +15,7 @@ aea_data_pipeline/
 │   └── code_storage.ipynb         # Utility code storage (12 cells)
 ├── data/
 │   ├── (root)                     # Raw inputs + intermediate files
-│   ├── final/                     # Final output CSVs (20 files)
+│   ├── final/                     # Final output CSVs (25 files)
 │   └── merged_data_files/         # Optional intermediate saves
 ├── CLAUDE.md
 ├── PRD.md
@@ -286,7 +286,7 @@ Output: `third_pass_*.csv` -> copied to `final/final_*.csv`
 | First pass | `first_pass_*.csv` | After Part 1 (Pct, emp, wage) |
 | Second pass | `second_pass_*.csv` | After Part 2 (taxonomy + auto/aug) |
 | Third pass | `third_pass_*.csv` | After Part 3 (ratings) |
-| Final | `final/final_*.csv` | After cumulative build, dws ratings, column reorder (22 per-version + 10 cumulative) |
+| Final | `final/final_*.csv` | After cumulative build, dws ratings, column reorder (15 per-version + 10 cumulative) |
 
 All intermediate files are saved to `data/` root. Final files go to `data/final/`.
 

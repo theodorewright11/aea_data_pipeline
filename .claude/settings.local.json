@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python)"
+      "Bash(python)",
+      "Bash(du -sh /c/Users/teddy/Downloads/OAIP/Technical/aea_data_pipeline/data/*.csv)"
     ]
   }
 }

@@ -1,6 +1,74 @@
-# Manual
+# Data directory -- ignore everything by default, then allowlist raw inputs
+data/*
 data/merged_data_files/
-data/
+data/final/
+
+# --- Raw inputs used by data_merge.ipynb (allowlisted) ---
+
+# AEI task percentages (Part 1)
+!data/task_pct_v[1-5].csv
+!data/task_pct_api_v[3-5].csv
+
+# AEI raw conversation data for v3+ (Part 1)
+!data/aei_raw_claude_ai_2025-08-04_to_2025-08-11.csv
+!data/aei_raw_1p_api_2025-08-04_to_2025-08-11.csv
+!data/aei_raw_claude_ai_2025-11-13_to_2025-11-20.csv
+!data/aei_raw_1p_api_2025-11-13_to_2025-11-20.csv
+!data/aei_raw_claude_ai_2026-02-05_to_2026-02-12.csv
+!data/aei_raw_1p_api_2026-02-05_to_2026-02-12.csv
+
+# AEI auto/aug scores (Part 2)
+!data/automation_vs_augmentation_by_task_v[2-5].csv
+!data/automation_vs_augmentation_by_task_api_v[3-5].csv
+
+# MCP task results (Part 1)
+!data/task_results_2025-04-24.csv
+!data/task_results_2025-05-24.csv
+!data/task_results_2025-07-23.csv
+!data/task_results_2026-02-18.csv
+
+# MCP raw results -- used in Part 2 for Microsoft auto/aug calibration
+# EXCLUDED: 186MB, exceeds GitHub 100MB limit.
+# Download from: https://huggingface.co/datasets/theodorewright11/mcp_to_onet_classification
+# data/mcp_results_2026-02-18.csv
+
+# Microsoft (Part 1)
+!data/iwa_metrics.csv
+
+# ECO baselines (Part 1)
+!data/task_pct_eco_2015.csv
+!data/task_pct_eco_2025.csv
+
+# O*NET task statements
+!data/task_statements_v20.1.csv
+!data/task_statements_v30.1.csv
+
+# O*NET taxonomy (DWA/IWA/GWA)
+!data/tasks_dwa_iwa_gwa_v20.1.csv
+!data/tasks_dwa_iwa_gwa_v30.1.csv
+!data/tasks_dwa_iwa_gwa_v30.1_physical.csv
+
+# O*NET task ratings (Part 3)
+!data/task_ratings_v30.1.csv
+
+# Physical task flags & DWS ratings
+!data/physical_tasks.csv
+!data/dws_ratings.csv
+
+# BLS OEWS wage & employment
+!data/oews_national_2024.csv
+!data/oews_states_2024.csv
+!data/oews_national_2015.csv
+!data/oews_states_2015.csv
+!data/scraped_wage_data.csv
+
+# SOC structure & crosswalks
+!data/soc_structure_2019.csv
+!data/2010_to_2019_soc_crosswalk.csv
+!data/detailed_occ_2019.csv
+
+# Master pct (used by adjust_emp)
+!data/master_pct_normalized.csv
 
 
 

@@ -45,7 +45,7 @@ The final CSVs are consumed by the dashboard backend (`aea_dashboard` repo). Thi
 
 All final outputs are saved to `data/final/`. Each row is one task within one occupation.
 
-### Per-Version Datasets (22 files)
+### Per-Version Datasets (15 files)
 
 | Dataset | File | SOC Version |
 |---------|------|-------------|
